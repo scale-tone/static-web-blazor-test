@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@inject IHttpClientFactory ClientFactory
 @inject IJSRuntime JS
 
 <PageTitle>Index</PageTitle>
@@ -13,7 +16,13 @@ Welcome to your new app.
 
     private async Task OnTestBtnClick()
     {
-        await JS.InvokeVoidAsync("alert", "OK!");
+        var client = ClientFactory.CreateClient();
+
+        var response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/api/httptest"));
+
+
+
+        await JS.InvokeVoidAsync("alert", response.StatusCode);
     }
 
 }
