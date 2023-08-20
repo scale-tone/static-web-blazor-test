@@ -36,6 +36,6 @@
 
         var userInfo = JsonSerializer.Deserialize<UserResponse>(json);
 
-        this.userName = json + "|" + userInfo?.clientPrincipal?.ToString() ?? "null" + "|" + userInfo?.clientPrincipal?.userDetails ?? "null";
+        this.userName = json + "|" + (userInfo?.clientPrincipal?.ToString() ?? "null") + "|" + (userInfo?.clientPrincipal?.userDetails ?? "null");
     }
 }
