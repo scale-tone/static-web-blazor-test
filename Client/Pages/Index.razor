@@ -12,7 +12,18 @@
 <button @onclick="OnTestBtnClick">Greet me</button>
 
 @code {
+
     private string userName = "";
+
+    class UserResponse
+    {
+        public class ClientPrincipal
+        {
+            public string userDetails;
+        }
+
+        public ClientPrincipal clientPrincipal;
+    }
 
     private async Task OnTestBtnClick()
     {
@@ -20,9 +31,8 @@
 
         using var responseStream = await response.Content.ReadAsStreamAsync();
 
-        dynamic userJson = JsonSerializer.Deserialize<ExpandoObject>(responseStream);
+        var userInfo = JsonSerializer.Deserialize<UserResponse>(responseStream);
 
-        this.userName = userJson.clientPrincipal.userDetails;
+        this.userName = userInfo.clientPrincipal.userDetails;
     }
-
 }
