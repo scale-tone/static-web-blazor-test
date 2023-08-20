@@ -19,7 +19,7 @@
     {
         public class ClientPrincipal
         {
-            public string userDetails;
+            public string userDetails { get; set; }
         }
 
         public ClientPrincipal clientPrincipal;
@@ -29,9 +29,13 @@
     {
         var response = await client.GetAsync("/.auth/me");
 
-        this.userName = response.StatusCode.ToString();
+        using var responseStream = await response.Content.ReadAsStreamAsync();
 
-//        using var responseStream = await response.Content.ReadAsStreamAsync();
+        dynamic userJson = JsonSerializer.Deserialize<ExpandoObject>(responseStream);
+
+        this.userName = userJson?.ToString() ?? "null";
+
+//        string s = await responseStream.Read
 
 //        var userInfo = JsonSerializer.Deserialize<UserResponse>(responseStream);
 
