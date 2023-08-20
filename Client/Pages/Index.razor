@@ -29,10 +29,12 @@
     {
         var response = await client.GetAsync("/.auth/me");
 
-        using var responseStream = await response.Content.ReadAsStreamAsync();
+        this.userName = response.StatusCode.ToString();
 
-        var userInfo = JsonSerializer.Deserialize<UserResponse>(responseStream);
+//        using var responseStream = await response.Content.ReadAsStreamAsync();
 
-        this.userName = userInfo.clientPrincipal.userDetails;
+//        var userInfo = JsonSerializer.Deserialize<UserResponse>(responseStream);
+
+//        this.userName = userInfo.clientPrincipal.userDetails;
     }
 }
