@@ -17,7 +17,7 @@ namespace StaticWebAppTestApi
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-            return new OkObjectResult("OK!");
+            return new OkObjectResult("OK!!!");
         }
     }
 }
